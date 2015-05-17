@@ -1,0 +1,5 @@
+62 Afghanistan Angola Antarctica Austria Azerbaijan Bahamas Barbados Belarus Botswana Burundi Canada China Cyprus Denmark Dominica Ecuador Eritrea Ethiopia Finland Georgia Germany Ghana Greece Jordan Kiribati Kuwait Kyrgyzstan Libya Liechtenstein Macao Malawi Malaysia Martinique Montenegro Montserrat Myanmar Namibia Narnia Nepal Niger Nigeria Oman Poland Portugal Romania Rwanda Samoa Senegal Serbia Seychelles Slovakia Slovenia Somalia Sudan Switzerland Tajikistan Tokelau Turkey Uganda Ukraine Zambia Zimbabwe 
+ENV: C++
+POINT: アルゴリズムはすぐに分かったのですがC++で実装するのが大変でした。
+
+『プログラマの数学』欲しいです！！！

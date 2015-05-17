@@ -1,0 +1,61 @@
+※これは解答用テキストファイルです。
+
+■解答（整数値）を記入してください。
+
+36775789065297
+
+☆以下は任意でお答えください（お答えいただけると大変ウれシいです）
+
+■使用言語を教えてください。
+
+ruby
+
+■解き方（アルゴリズム等）を教えてください。
+
+(a,b)が互いに素となる座標にはウシを飼えることに気付き、
+7777777以下で互いに素となる(a,b)ペアの個数を計算することで答えを求めようとしました。
+しかし777777で必要な時間が10時間程となり、さらに一桁増やすと45日ぐらいかかりそうだった
+ので諦めました。
+6桁までの結果を載せておきます。
+
+7 25
+77 3545
+777 366641
+7777 36761793
+77777 3677453621
+777777 367757228689
+
+■よければコードも貼り付けてください。
+
+class Hikoboshi
+  def initialize
+    @n = 0
+    @ans = 0
+  end  
+
+  def relprime(a, b)
+    c = a + b
+    while c < @n do
+      # print "#{b} #{c}n"
+      relprime(b, c)
+      @ans += 1
+      c += b
+    end
+  end
+  
+  def solve(n)
+    @n = n
+    @ans = 0
+    relprime(1, 1)
+    return @ans*2 + 3
+  end
+end
+
+hikoboshi = Hikoboshi.new
+print "7 #{hikoboshi.solve(7)}n"
+print "77 #{hikoboshi.solve(77)}n"
+print "777 #{hikoboshi.solve(777)}n"
+print "7777 #{hikoboshi.solve(7777)}n"
+print "77777 #{hikoboshi.solve(77777)}n"
+print "777777 #{hikoboshi.solve(777777)}n"
+print "7777777 #{hikoboshi.solve(7777777)}n"

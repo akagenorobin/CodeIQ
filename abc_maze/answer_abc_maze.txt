@@ -1,0 +1,97 @@
+※これは解答用テキストファイルです。
+
+■解答を記入してください。
+（例）
+sample.in.txt: possible
+
+case1.in.txt: possible
+case2.in.txt: impossible
+case3.in.txt: impossible
+case4.in.txt: impossible
+case5.in.txt: possible
+case6.in.txt: possible
+case7.in.txt: impossible
+
+
+
+■使用言語・動作環境について
+(1)言語の種類を記入してください。未記入の場合、減点となります。
+
+ruby
+
+(2)コンパイラ／インタプリタの名称・バージョン情報を記入してください。未記入の場合、減点となります。
+
+ruby 2.0.0p451 (2014-02-24 revision 45167) [x86_64-darwin12.5.0]
+
+■プログラムの特長・工夫した点等、アピールポイントについて。
+あなたが書いたコードの内容や工夫した点をわかりやすく説明してください。未記入の場合、減点となります。
+
+幅優先で探索しました。
+
+■もし企業からのスカウトメールがきたらどのくらい積極的にアクションすると思いますか？任意でお答えください。
+「積極的に会ってみたいと思う」「社名や条件次第では会ってみたいと思う」「よほどのことがない限り返信しない」、他ありましたら記入してください。
+
+よほどのことがない限り返信しない
+
+■あなたが書いたコードを貼り付けてください。未記入の場合は評価の対象外となります。
+
+class Maze
+  def initialize(filename)
+    @maze = []
+    File.open(filename) do |input|
+      input.each_line do |line|
+        @maze << line.chomp
+      end
+    end
+    @n = @maze.size
+    # puts @maze
+  end
+  
+  def solve
+    board = Array.new(@n){Array.new(@n){-1}}
+    board[0][0] = 0
+    ans = "impossible"
+    q = Queue.new
+    q.push([@maze[0][0], 0, 0])
+    while !q.empty? do
+      p = q.pop
+      c = p[0]
+      x = p[1]
+      y = p[2]
+      if x == @n-1 && y == @n-1
+        ans = "possible"
+      end
+      pnext = [[x-1,y], [x+1, y], [x, y-1], [x, y+1]]
+      pnext.each do |pn|
+        xn = pn[0]
+        yn = pn[1]
+        if xn < 0 || yn < 0 || xn > @n-1 || yn > @n-1 || (xn == x && yn == y)
+          next
+        end
+        if c == 'A' && @maze[xn][yn] == 'B' && board[xn][yn] == -1
+          q.push(['B', xn, yn])
+          board[xn][yn] = board[x][y] + 1
+        end
+        if c == 'B' && @maze[xn][yn] == 'C' && board[xn][yn] == -1
+          q.push(['C', xn, yn])
+          board[xn][yn] = board[x][y] + 1
+        end
+        if c == 'C' && @maze[xn][yn] == 'A' && board[xn][yn] == -1
+          q.push(['A', xn, yn])
+          board[xn][yn] = board[x][y] + 1
+        end
+      end
+    end
+    # board.each do |b|
+    #   p b
+    # end
+    return ans
+  end
+end
+
+for i in 1..7 do
+  maze = Maze.new("case#{i}.in.txt")
+  print "#{i} #{maze.solve}n"
+end
+
+
